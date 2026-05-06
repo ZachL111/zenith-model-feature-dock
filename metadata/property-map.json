@@ -1,0 +1,28 @@
+{
+  "repo": "zenith-model-feature-dock",
+  "language": "Haskell",
+  "category": "ML utilities",
+  "goal": "Create a Haskell reference implementation for feature workflows, centered on graph analysis, node-edge fixtures, and cycle and reachability reports.",
+  "weights": {
+    "signal": 2,
+    "slack": 1,
+    "confidence": 1,
+    "drag": 2
+  },
+  "thresholds": {
+    "ship": 166,
+    "watch": 119
+  },
+  "properties": [
+    "raising signal cannot reduce score",
+    "raising drag cannot improve score",
+    "lane labels must match configured thresholds",
+    "golden fixture ids must remain unique"
+  ],
+  "fixture_files": [
+    "fixtures/golden/scoreboard.csv",
+    "fixtures/golden/lane-matrix.csv",
+    "fixtures/fuzz/mutations.csv",
+    "fixtures/fuzz/boundary-cases.jsonl"
+  ]
+}

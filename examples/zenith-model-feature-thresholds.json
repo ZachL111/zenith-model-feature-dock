@@ -1,0 +1,17 @@
+{
+  "repo": "zenith-model-feature-dock",
+  "thresholds": {
+    "signal": 2,
+    "slack": 1,
+    "confidence": 1,
+    "drag": 2,
+    "ship": 166,
+    "watch": 119
+  },
+  "terms": [
+    "feature drift",
+    "window width",
+    "metric stability",
+    "explainability"
+  ]
+}
