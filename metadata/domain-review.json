@@ -1,0 +1,73 @@
+{
+  "repo": "zenith-model-feature-dock",
+  "language": "Haskell",
+  "category": "ML utilities",
+  "goal": "Create a Haskell reference implementation for feature workflows, centered on graph analysis, node-edge fixtures, and cycle and reachability reports.",
+  "review_model": {
+    "terms": [
+      "feature drift",
+      "window width",
+      "metric stability",
+      "explainability"
+    ],
+    "lanes": [
+      "ship",
+      "watch",
+      "hold"
+    ],
+    "score": "signal * 2 + slack + confidence - drag * 3",
+    "purpose": "surface the domain-specific cases that need the most careful review"
+  },
+  "cases": [
+    {
+      "name": "baseline",
+      "focus": "feature drift",
+      "signal": 69,
+      "slack": 34,
+      "drag": 18,
+      "confidence": 73,
+      "score": 191,
+      "lane": "ship"
+    },
+    {
+      "name": "stress",
+      "focus": "window width",
+      "signal": 82,
+      "slack": 49,
+      "drag": 15,
+      "confidence": 77,
+      "score": 245,
+      "lane": "ship"
+    },
+    {
+      "name": "edge",
+      "focus": "metric stability",
+      "signal": 81,
+      "slack": 24,
+      "drag": 16,
+      "confidence": 53,
+      "score": 191,
+      "lane": "ship"
+    },
+    {
+      "name": "recovery",
+      "focus": "explainability",
+      "signal": 89,
+      "slack": 42,
+      "drag": 30,
+      "confidence": 72,
+      "score": 202,
+      "lane": "ship"
+    },
+    {
+      "name": "stale",
+      "focus": "feature drift",
+      "signal": 57,
+      "slack": 34,
+      "drag": 10,
+      "confidence": 89,
+      "score": 207,
+      "lane": "ship"
+    }
+  ]
+}

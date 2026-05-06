@@ -1,68 +1,40 @@
 # zenith-model-feature-dock
 
-`zenith-model-feature-dock` treats ml utilities as a local verification problem. The Haskell implementation is intentionally narrow, but the fixtures and notes make the behavior explicit.
+`zenith-model-feature-dock` is a Haskell project in ml utilities. Its focus is to create a Haskell reference implementation for feature workflows, centered on graph analysis, node-edge fixtures, and cycle and reachability reports.
 
-## Zenith Model Feature Dock Checkpoints
+## Problem It Tries To Make Smaller
 
-Treat the compact fixture as the contract and the extended examples as a scratchpad. The code should stay boring enough that a change in behavior is obvious from the test output.
+The point is to make a small domain rule concrete enough that a reader can change it and immediately see what broke.
 
-## What This Is For
+## Zenith Model Feature Dock Review Notes
 
-This project keeps the domain idea close to the tests. That makes it useful as a reference implementation, a small experiment, or a starting point for a more specialized tool.
+`stress` and `baseline` are the cases worth reading first. They show the optimistic and cautious ends of the fixture.
 
-## Useful Pieces
+## Working Pieces
 
-- Models feature signals with deterministic scoring and explicit review decisions.
-- Uses fixture data to keep metric checks changes visible in code review.
-- Includes extended examples for windowed behavior, including `surge` and `degraded`.
-- Documents explainable outputs tradeoffs in `docs/operations.md`.
-- Runs locally with a single verification command and no external credentials.
+- `fixtures/domain_review.csv` adds cases for feature drift and window width.
+- `metadata/domain-review.json` records the same cases in structured form.
+- `config/review-profile.json` captures the read order and the two review questions.
+- `examples/zenith-model-feature-walkthrough.md` walks through the case spread.
+- The Haskell code includes a review path for `window width` and `feature drift`.
+- `docs/field-notes.md` explains the strongest and weakest cases.
 
-## Architecture Notes
+## Design Notes
 
-The design is intentionally direct: parse or construct a signal, score it, classify it, and verify the expected branch. This makes the repository useful for studying ml utilities behavior without needing a service or database unless the language project itself is SQL. The Haskell code keeps the pure scoring function isolated so tests can check it without setup.
+The implementation keeps the scoring rule plain: reward signal and confidence, preserve slack, penalize drag, then classify the result into a review lane.
 
-## Project Layout
+The Haskell code keeps the review rule close to the tests.
 
-- `src`: primary implementation
-- `tests`: verification harness
-- `fixtures`: compact golden scenarios
-- `examples`: expanded scenario set
-- `metadata`: project constants and verification metadata
-- `docs`: operations and extension notes
-- `scripts`: local verification and audit commands
-
-## Tooling
-
-Install Haskell and run the commands from the repository root. The project does not need credentials or a hosted service.
-
-## Local Workflow
+## Example Run
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1
 ```
 
-This runs the language-level build or test path against the compact fixture set.
+## Tests
 
-## Quality Gate
+That command is also the regression path. It verifies the domain cases and catches mismatches between the CSV, metadata, and code.
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts/audit.ps1
-```
+## Known Limits
 
-The audit command checks repository structure and README constraints before it delegates to the verifier.
-
-## Case Study
-
-`examples/extended_cases.csv` adds six named cases. I kept the names plain so failures are easy to read in a terminal: baseline, pressure, surge, degraded, recovery, and boundary.
-
-## Scope
-
-The examples cover useful edges, not every edge. A larger version would add malformed-input tests, richer reports, and deeper domain parsers.
-
-## Expansion Ideas
-
-- Split the scoring constants into a typed configuration object and validate it before use.
-- Add a comparison mode that shows how decisions change when one signal is adjusted.
-- Add a loader for `examples/extended_cases.csv` and promote selected cases into the language test suite.
-- Add one more ml utilities fixture that focuses on a malformed or borderline input.
+No external service is required. A deeper version would add more negative cases and a clearer boundary around invalid input.
